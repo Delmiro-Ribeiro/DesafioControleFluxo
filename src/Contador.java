@@ -1,47 +1,39 @@
-import java.util.InputMismatchException;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
 public class Contador {
-	public static void main(String[] args) {
 
-		Scanner terminal = new Scanner(System.in);
+    public static void main(String[] args) {
+
+        Scanner terminal = new Scanner(System.in);
         
-		try {
+        try {
             System.out.print("Digite o primeiro parâmetro = ");
-            int parametroUm = terminal.nextInt();
-    
-            System.out.print("Digite o segundo parâmetro = ");
-            int parametroDois = terminal.nextInt();
-            
-            contar(parametroUm, parametroDois);
+            int parametro1 = terminal.nextInt();
 
-		}catch (InputMismatchException e) {
-			System.out.println(e.getMessage());
-		}
-        terminal.close();
-		
-	}
-	/**
-	 * @param parametroUm
-	 * @param parametroDois
-	 * @throws ParametrosInvalidosException
-     * Removi a operacão => int contagem = parametroDois - parametroUm / pois no momento não encontrei uma forma de fazer acontagem do valor inicial
-     * até  valor final sem comecar do zero(0) que é representado pelo contador(i).
-	 */
-	static void contar(int parametroUm, int parametroDois ) throws ParametrosInvalidosException {
-		
-        if(parametroUm < parametroDois){
-               // int contagem = parametroDois - parametroUm;
-                int i = parametroUm;
-                while(i <= parametroDois){
-                    System.out.print(i + " ");
-                    i++;
-                }return;
-           
-            }
-            throw new ParametrosInvalidosException();
+            System.out.print("Digite o segundo parâmetro = ");
+            int parametro2 = terminal.nextInt();
+
+            contar(parametro1, parametro2);
+
+        } catch (NoSuchElementException | IllegalStateException e) {
+            System.out.println("Só é aceito numeros inteiros, por favor digite novamente!");
+
+        } catch (ParametrosInvalidosException e) {
+            System.out.println(e.getMessage());
         }
-		
-		
-	}
+        
+        terminal.close();
+    }
+
+    private static void contar(int parametro1, int parametro2) throws ParametrosInvalidosException {
+        if (parametro1 < parametro2) {
+            for (int i = 0; i < (parametro2 - parametro1); i++) {
+                System.out.print((i + 1) + " ");
+            }
+            return;
+        }
+        throw new ParametrosInvalidosException();
+    }
+}
